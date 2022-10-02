@@ -3,18 +3,13 @@ from datetime import datetime,timezone,timedelta
 import socket
 import threading
 import socketserver
-import time 
-import os
-from urllib import response
-import uuid
+# from urllib import response
+# import uuid
+# import csv
+# from rsa import PublicKey, verify
 from typing import Generator
-import csv
-import pg8000
-from rsa import PublicKey, verify
-import sqlalchemy
-from google.cloud.sql.connector import Connector
 import time
-from Crypto.PublicKey import RSA
+# from Crypto.PublicKey import RSA
 import pyotp
 import psycopg2
 
@@ -178,7 +173,7 @@ def update_version(data):
                 
 
 def download_store_data(data):
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     
     with pool.cursor() as db_conn:
         
@@ -278,8 +273,7 @@ def download_store_data(data):
     return [size,return_data]
 
 def report_store(data):
-    
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     with pool.cursor() as db_conn:
         
         try:
@@ -299,7 +293,7 @@ def report_store(data):
 
 def new_store(data):
 
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     with pool.cursor() as db_conn:
         
         try:
@@ -321,7 +315,7 @@ def new_store(data):
 
 def share_location(data):
 
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     with pool.cursor() as db_conn:
         
         id=data[1]
@@ -374,7 +368,7 @@ def share_location(data):
     return [size,return_data]
 
 def verify_otp(data):
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     with pool.cursor() as db_conn:
         otp=data[1]
 
@@ -403,7 +397,7 @@ def verify_otp(data):
 def get_location(data):
     
 
-    pool = psycopg2.connect(database="SafePlace", user="postgres", password="1091102", host="127.0.0.1", port="5432")
+    pool = psycopg2.connect(database="safeplace", user="postgres", password="20220928", host="172.17.0.2", port="5432")
     with pool.cursor() as db_conn:
 
         try:
@@ -486,7 +480,7 @@ if __name__ == "__main__":
 
 
 
-    HOST, PORT = '', 8888
+    HOST, PORT = '', 8887
     print(PORT)
     server = ThreadedTCPServer((HOST, PORT), SafePlaceThreadedTCPServerHandler)
 
